@@ -65,35 +65,24 @@ def get_recipes_by_type(recipe_type):
 def get_recipe_details(recipe_id):
     local_cursor = conn.cursor()
     try:
+
+        # Fetch the recipe details
         recipe_cursor = local_cursor.execute(
             "SELECT * FROM recipes WHERE recipe_id = ?", [recipe_id]
         )
         recipe = recipe_cursor.fetchone()
+        #print(recipe)# (recipe_id, recipe_name, recipe_description, recipe_prep_time, recipe_cook_time, recipe_author_id, recipe_type_id)
         if recipe is None:
             return f"Recipe with ID {recipe_id} not found.", 404
         recipe_details_list = []
-        recipe_id = recipe[0]
-        # recipe_details_list.append(recipe_id)
-        recipe_name = recipe[1]
-        # recipe_details_list.append(recipe_name)
-        recipe_description = recipe[2]
-        # recipe_details_list.append(recipe_description)
-        recipe_prep_time = recipe[3]
-        # recipe_details_list.append(recipe_prep_time)
-        recipe_cook_time = recipe[4]
-        # recipe_details_list.append(recipe_cook_time)
-        recipe_author_id = recipe[5]
-        # recipe_details_list.append(recipe_author_id)
-        recipe_type_id = recipe[6]
-        # recipe_details_list.append(recipe_type_id)
-
         # Use slicing over individual assignments
         #  appending each field individually is a valid approach, it is verbose and prone to error if the number of desired fields changes
         # this single line slicing operation accomplishes the same goal more efficiently and elegantly
         # it is the "Pythonic" way to handle such a task
-        recipe_details_list = list(recipe[:7])
+        recipe_details_list = list(recipe[:7])# this will get the first 7 fields of the recipe tuple and convert it to a list
 
 
+        # Fetch the ingredients for the recipe
         ingredients_cursor = local_cursor.execute(
             """
             SELECT ri.quantity, mu.measurement_unit_name, i.ingredient_name
@@ -107,7 +96,20 @@ def get_recipe_details(recipe_id):
         recipe_ingredients = ingredients_cursor.fetchall()
         if recipe_ingredients is None:
             return f"Recipe with ID {recipe_id} ingredients not found.", 404
-
+        
+        #Fetch the author name for the recipe
+        author_cursor = local_cursor.execute(
+            """
+            SELECT author_name
+            FROM authors
+            WHERE author_id = ?
+            """, [recipe[5]] # recipe[5] is the author_id from the recipe details
+        )
+        author = author_cursor.fetchone()
+        if author is None:
+            return f"Recipe with ID {recipe_id} author not found.", 404
+        recipe_details_list.append(author[0])  # Append the author name to the recipe details
+        print(recipe_details_list)  # For debugging purposes
     finally:
         local_cursor.close()
     return render_template("recipe_detail.html", recipe=recipe_details_list, ingredients=recipe_ingredients)

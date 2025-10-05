@@ -172,3 +172,18 @@ For questions or support, please open an issue in the GitHub repository.
 ---
 
 *Made with 🌱 for the vegan community*
+
+
+
+
+
+
+
+
+
+
+
+____________________________________
+<!-- 
+- add, instructions, servings to database
+- Search functionality -->

@@ -16,7 +16,7 @@
 }
 
 /*Recipe*/
-.servings-details {
+.servings-details, .other-details {
   border-top: 0.3rem solid #4a2781;
   border-bottom: 0.3rem solid #4a2781;
 }

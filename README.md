@@ -22,43 +22,6 @@ This vegan recipe application provides users with a curated collection of plant-
 - **Frontend**: HTML5, CSS3, Bootstrap
 - **Template Engine**: Jinja2
 
-## 📁 Project Structure
-
-```
-Recipe-App/
-├── server.py                   # Main Flask application
-├── README.md                   # Project documentation
-├── static/                     # Static assets
-│   ├── css/                    # Stylesheets
-│   │   ├── base.css            # Base styling
-│   │   ├── category-cards.css  # Category card styles
-│   │   ├── featured.css        # Featured section styles
-│   │   ├── main.css            # Main page styles
-│   │   └── recipe.css          # Recipe detail styles
-│   └── images/                 # Image assets
-│       ├── appetizers.jpg
-│       ├── beverages.jpg
-│       ├── breakfast.jpg
-│       ├── dessert2.jpg
-│       ├── feature-1.jpg
-│       ├── header-image.jpg
-│       ├── pita-entree.jpg
-│       ├── plate-share-logo-resize.png
-│       ├── plate-share-logo-thumbnail.png
-│       ├── salad.jpg
-│       ├── sides.jpg
-│       └── soup.jpg
-└── templates/                   # Jinja2 templates
-    ├── base.html               # Base template
-    ├── category_list.html      # Recipe categories page
-    ├── index.html              # Homepage
-    ├── recipe_cards_list.html  # Recipe listing page
-    ├── recipe_detail.html      # Individual recipe page
-    └── includes/               # Template partials
-        ├── recipe_category_cards.html
-        └── recipe_list_card.html
-```
-
 ## 🗃️ Database Schema
 
 The application connects to a SQL Server database with the following key tables:

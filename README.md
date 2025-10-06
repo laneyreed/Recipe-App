@@ -192,4 +192,7 @@ ____________________________________
 -- added image_url and category_description columns to the recipe_type table 
 -- updated the /recipes-categories route
 -  updated the category_list.html file
+-- added recipe_image_url column to the recipes table
+-- updated the recipe_cards_list.html to use images from database
+-- updated the /recipes/type/<recipe_type> route
 -->

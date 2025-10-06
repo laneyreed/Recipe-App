@@ -35,8 +35,9 @@ def get_recipe_categories():
         for row in recipes_cursor:
             #make the tuple into a list and append to recipeCategoriesList
             recipeCategoriesList.append(list(row))
-        print(recipeCategoriesList)
-
+        # recipeCategoriesList is a list of lists, each inner list contains the fields of a recipe category
+        # [recipe_type_id, recipe_type_name, image_url, category_description]
+        #print(recipeCategoriesList)
     finally:
         local_cursor.close()
     return render_template("category_list.html", categories=recipeCategoriesList)
@@ -44,34 +45,36 @@ def get_recipe_categories():
 
 @app.route("/recipes/type/<recipe_type>")
 def get_recipes_by_type(recipe_type):
-     recipe_type_map = {
-         "appetizers": 1,
-         "breakfast": 2,
-         "soups": 3,
-         "salads": 5,
-         "sides": 6,
-         "entrees": 7,
-         "desserts": 10
-     }
+    # Validate the recipe_type to prevent SQL injection
+    # without this validation, a malicious user could potentially manipulate the SQL query by injecting SQL code through the recipe_type parameter
+    # this validation ensures that only known recipe types are processed
+    # this is a simple validation, in a real-world application, you might want to implement a more robust validation mechanism
+    # for example, you could check against a list of recipe types fetched from the database
+    valid_recipe_types = ["appetizers", "breakfast", "soups", "salads", "sides", "entrees", "desserts", "beverages"]
+    if recipe_type not in valid_recipe_types:
+        return f"Unknown recipe type: {recipe_type}", 404
 
-     recipe_type_id = recipe_type_map.get(recipe_type.lower())
-     if recipe_type_id is None:
-         return f"Unknown recipe type: {recipe_type}", 404
+    local_cursor = conn.cursor()
+    try:
+         recipes_cursor = local_cursor.execute("""
+                                               SELECT * FROM recipes
+                                               WHERE recipe_type_id = (
+                                               SELECT recipe_type_id FROM recipe_types WHERE recipe_type_name = ?
+                                               );
+                                               """, [recipe_type])
+         
 
-     local_cursor = conn.cursor()
-     try:
-         recipes_cursor = local_cursor.execute("SELECT recipe_id, recipe_name, recipe_description FROM recipes WHERE recipe_type_id = ?", [recipe_type_id])
          recipes_list = []
          for row in recipes_cursor:
-             recipe_id = row[0]
-             recipe_name = row[1]
-             recipe_description = row[2]
-             recipes_list.append([recipe_id, recipe_name, recipe_description])
-     finally:
+                recipes_list.append(list(row)) # make the tuple into a list and append to recipes_list
+            # recipes_list is a list of lists, each inner list contains the fields of a recipe
+            # [recipe_id, recipe_name, recipe_description, recipe_prep_time, recipe_cook_time, recipe_author_id, recipe_type_id, recipe_image_url]
+            #print(recipes_list)
+    finally:
          local_cursor.close()
 
-     template_path = "recipe_cards_list.html"
-     return render_template(template_path, recipes=recipes_list, category_title=recipe_type)
+    template_path = "recipe_cards_list.html"
+    return render_template(template_path, recipes=recipes_list, category_title=recipe_type)
 
 
 #create a route to display a specific recipe

@@ -9,6 +9,7 @@ DRIVER_NAME = 'SQL SERVER'
 SERVER_NAME = 'SHANNONHP\MSSQLSERVER01'
 DATABASE_NAME = 'VeganRecipes'
 
+
 connection_string = f"""
     DRIVER={{{DRIVER_NAME}}};
     SERVER={SERVER_NAME};
@@ -16,9 +17,10 @@ connection_string = f"""
     Trust_Connection=yes;
 """
 
-conn = odbc.connect(connection_string)
 
-# cursor = conn.cursor()
+
+
+conn = odbc.connect(connection_string)
 
 @app.route("/")
 def home():
@@ -26,7 +28,19 @@ def home():
 
 @app.route("/recipes-categories")
 def get_recipe_categories():
-    return render_template("category_list.html")
+    local_cursor = conn.cursor()
+    try:
+        recipes_cursor = local_cursor.execute("SELECT * FROM recipe_types")
+        recipeCategoriesList = []
+        for row in recipes_cursor:
+            #make the tuple into a list and append to recipeCategoriesList
+            recipeCategoriesList.append(list(row))
+        print(recipeCategoriesList)
+
+    finally:
+        local_cursor.close()
+    return render_template("category_list.html", categories=recipeCategoriesList)
+
 
 @app.route("/recipes/type/<recipe_type>")
 def get_recipes_by_type(recipe_type):

@@ -186,4 +186,10 @@ For questions or support, please open an issue in the GitHub repository.
 ____________________________________
 <!-- 
 - add, instructions, servings to database
-- Search functionality -->
+- Search functionality 
+
+-- added instructions table
+-- added image_url and category_description columns to the recipe_type table 
+-- updated the /recipes-categories route
+-  updated the category_list.html file
+-->

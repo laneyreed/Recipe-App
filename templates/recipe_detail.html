@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 
 {% block recipes_type_h1 %}
-<h1>{{recipe[1]}}</h1>
+<h1>{{recipe_info[1]}}</h1>
 {% endblock  %}
 
 {% block intro_paragraph %}
             <p>
-                {{recipe[2]}}
+                {{recipe_info[2]}}
             </p>
 <div class="container mb-5">
     <div class="servings-details row mb-5 py-3">
         <div class="col-sm-12 col-md-6 col-lg-3" style="height: 100%;">
             <p class="mb-0">
-                Prep Time: {{recipe[3]}} minutes
+                Prep Time: {{recipe_info[3]}} minutes
             </p>
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-3" style="height: 100%;">
             <p class="mb-0">
-                Cook Time: {{recipe[4]}} minutes
+                Cook Time: {{recipe_info[4]}} minutes
             </p>
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-3" style="height: 100%;">
             <p class="mb-0">
-                Total Time: {{recipe[3] + recipe[4]}}  minutes
+                Total Time: {{recipe_info[3] + recipe_info[4]}}  minutes
             </p>
         </div>
 
@@ -55,10 +55,9 @@
                 <h3>Instructions</h3>
             </div>
             <ol class="list-group list-group-flush  list-group-numbered text-start">
-                <li class="list-group-item">Preheat oven to 350°F (175°C). Grease and flour a 9x9 inch pan or line a muffin pan with paper liners.</li>
-                <li class="list-group-item">In a medium bowl, mix together the sugar, flour, cocoa, baking powder, baking soda, and salt. Add the eggs, milk, oil, and vanilla, mix for 2 minutes on medium speed of mixer. Stir in the boiling water last (batter will be thin). Pour evenly into the prepared pan.</li>
-                <li class="list-group-item">Bake 30 to 35 minutes in the preheated oven, until the cake tests done with a toothpick. Cool in the pan for 10 minutes, then remove to a wire rack to cool completely.</li>
-                <li class="list-group-item">Frost with your favorite frosting and enjoy!</li>   
+                {% for step in instructions %}
+                <li class="list-group-item"> {{ step[1] }}</li>
+                {% endfor %}
             </ol>
 
                         {#<ol>
@@ -72,7 +71,7 @@
         <div class="other-details row mb-5 py-3">
         <div class="col" style="height: 100%;">
             <p class="mb-0">
-                Author: {{recipe[7]}}
+                Author: {{recipe_info[5]}}
             </p>
         </div>
         

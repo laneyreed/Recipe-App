@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
-{% block recipes_type_h1 %}
+{% block page_title %}
 <h1>Vegan Recipes</h1>
-{% endblock  %}
+{% endblock page_title  %}
 
-{% block intro_paragraph %}
+{% block intro %}
   <p>
     Vegan recipes composed entirely of plant-based ingredients and built around a diverse range of foods including fruits,
     vegetables, grains, legumes, nuts, and seeds. These recipes help you create meals that are rich, satisfying, and innovative, 
     ranging from grain bowls and stir-fries to burgers and dairy-free desserts. 
   </p>
-{% endblock %}
+{% endblock intro %}
 
  {% block main_section%}
   <section class="recipe-section container py-5" id="custom-cards">
@@ -27,4 +27,4 @@
 
         </div>
   </section>
-  {% endblock %}
+  {% endblock main_section %}

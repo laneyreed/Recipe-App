@@ -1,7 +1,24 @@
 {% extends "base.html" %}
-    {% block recipes_type_h1 %}
+    {% block page_title %}
+    
+    {% if search_term %}
         <h1>Search Results for "{{ search_term }}"</h1>
-    {% endblock %}
+    {% else %}
+        <h1>Recipe Search</h1>
+    {% endif %}
+    {% endblock page_title %}
+    
+
+    {% block intro %}
+    <form class="d-flex" role="search" method="GET" action="{{ url_for('search_recipes_query') }}">
+        <input class="form-control me-2" name="querySearchTerm" type="search" placeholder="Search" aria-label="Search" required />
+            <button class="btn btn-outline-success" type="submit">
+                Search
+            </button>
+    </form>
+    
+    {% endblock intro %}
+
     
 
   {% block main_section%} 
@@ -10,10 +27,10 @@
         <div class="recipes row">
                 {% if recipes %}
                     {% for recipe in recipes %}
-                    {% set recipe_id = recipe[0] %}
+                        {% set recipe_id = recipe[0] %}
                         {% set recipe_name = recipe[1] %}
-                        {% set recipe_image = recipe[7] %}
                         {% set recipe_description = recipe[2] %}
+                        {% set recipe_image = recipe[3] %}
                         {% include "./includes/recipe_cards_list.html" %}
                     {% endfor %}
                 {% else %}
@@ -22,4 +39,4 @@
                 {% endif %}
         </div>
   </section>
-  {% endblock %}
+  {% endblock main_section %}

@@ -126,14 +126,21 @@ def search_recipes_query():
     # only allow alphanumeric and spaces
     if not all(c.isalnum() or c.isspace() for c in query_search_term):
         return "Invalid search term. Only alphanumeric characters and spaces are allowed.", 400
-    if not query_search_term:
-        return "No search term provided.", 400
-
+    
     local_cursor = conn.cursor()
+    if not query_search_term:
+        search_results_list = []
+        search_results_cursor = local_cursor.execute("SELECT recipe_id, recipe_name, recipe_description, recipe_image_url FROM recipes")
+        for row in search_results_cursor:
+            search_results_list.append(list(row))
+        #print(search_results_list)
+        return render_template("search_results.html", recipes=search_results_list)
+
+    
     try:
         search_results_cursor = local_cursor.execute(
             """
-            SELECT * FROM recipes
+            SELECT recipe_id, recipe_name, recipe_description, recipe_image_url FROM recipes
             WHERE recipe_name LIKE ? OR recipe_description LIKE ?;
             """, [f'%{query_search_term}%', f'%{query_search_term}%']
         )
@@ -141,7 +148,7 @@ def search_recipes_query():
         search_results_list = []
         for row in search_results_cursor:
             search_results_list.append(list(row))
-        print(search_results_list)
+        #print(search_results_list)
     finally:
         local_cursor.close()
 

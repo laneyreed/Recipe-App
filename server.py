@@ -131,7 +131,7 @@ def get_recipe_details(recipe_id):
             """, [recipe_id]
         )
 
-        #make recipe_instructions into a list of lists
+        # make recipe_instructions into a list of lists
         recipe_instructions_list = []
         for row in recipe_instructions:
             recipe_instructions_list.append(list(row))

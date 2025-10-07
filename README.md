@@ -69,18 +69,7 @@ The application uses a modern, clean design approach with:
 
 ____________________________________
 <!-- 
-- add, instructions, servings to database
-- Search functionality 
-
--- added instructions table
--- added image_url and category_description columns to the recipe_type table 
--- updated the /recipes-categories route
--  updated the category_list.html file
--- added recipe_image_url column to the recipes table
--- updated the recipe_cards_list.html to use images from database
--- updated the /recipes/type/<recipe_type> route
--- updated the /recipes/<int:recipe_id> route to get instruction from database and simpler sql queries
--- update the recipe details html file
--- added sql query to get the ingredients
--- changed the layout of the recipe ingredients and instructions cards to have independent heights
+-- added Search functionality
+-- added search results html file
+-- changed recipe cards html file to be used for both search results and recipies by category
 -->

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block recipes_type_h1 %}
+<h1>{{ category_title.capitalize() }} Recipes</h1>
+{% endblock  %}
+
+{% block intro_paragraph %}
+    <p>
+        A vegan entrees made without any animal products, such as meat, poultry,
+        fish, dairy, or eggs. They are often hearty and satisfying, using a wide variety of plants
+        like vegetables, legumes, grains, tofu, and mushrooms to create rich flavors and textures.
+    </p>
+{% endblock %}
+
+
+
+{% block main_section%}
+{% set item = category_title %}
+  <section class="recipe-section container py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Recipes</h2>
+        <div class="recipes row">
+                {% if recipes %}
+                    {% for recipe in recipes %}
+                        {% set recipe_id = recipe[0] %}
+                        {% set recipe_name = recipe[1] %}
+                        {% set recipe_image = recipe[7] %}
+                        {% set recipe_description = recipe[2] %}
+                        {% include "./includes/recipe_cards_list.html" %}
+                    {% endfor %}
+                {% else %}
+                    <p>No recipes found in this category.</p>
+                    
+                {% endif %}
+        </div>
+    </section>
+
+{% endblock %} 

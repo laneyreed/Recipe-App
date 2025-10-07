@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+    {% block recipes_type_h1 %}
+        <h1>Search Results for "{{ search_term }}"</h1>
+    {% endblock %}
+    
+
+  {% block main_section%} 
+  <section class="recipe-section container py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Recipes</h2>
+        <div class="recipes row">
+                {% if recipes %}
+                    {% for recipe in recipes %}
+                    {% set recipe_id = recipe[0] %}
+                        {% set recipe_name = recipe[1] %}
+                        {% set recipe_image = recipe[7] %}
+                        {% set recipe_description = recipe[2] %}
+                        {% include "./includes/recipe_cards_list.html" %}
+                    {% endfor %}
+                {% else %}
+                    <p>No recipes found matching your search.</p>
+                    
+                {% endif %}
+        </div>
+  </section>
+  {% endblock %}

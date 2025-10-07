@@ -30,8 +30,8 @@
                         <a class="nav-link">About Us</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <form class="d-flex" role="search" method="GET" action="{{ url_for('search_recipes_query') }}">
+                    <input class="form-control me-2" name="querySearchTerm" type="search" placeholder="Search" aria-label="Search" />
                     <button class="btn btn-outline-success" type="submit">
                         Search
                     </button>
@@ -59,7 +59,9 @@
             </div>
         </div>
 
-        {% block main_section%}{% endblock %}
+        {% block main_section%}
+  
+        {% endblock %}
 
         <footer>
             <div class="container">

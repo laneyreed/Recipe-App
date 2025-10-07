@@ -1,4 +1,4 @@
-# PlateShare - Vegan Recipe Web Application
+# PlateShare - Vegan Recipe Web Application: Version 3
 
 A comprehensive Flask-based web application for browsing, searching, and viewing vegan recipes with a modern, responsive interface and robust database integration.
 

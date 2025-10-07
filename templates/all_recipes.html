@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+    {% block page_title %}
+        <h1>Vegan Recipes</h1>
+    {% endblock page_title %}
+    
+
+    {% block intro %}
+
+      <p>
+    Vegan recipes composed entirely of plant-based ingredients and built around a diverse range of foods including fruits,
+    vegetables, grains, legumes, nuts, and seeds. These recipes help you create meals that are rich, satisfying, and innovative, 
+    ranging from grain bowls and stir-fries to burgers and dairy-free desserts. 
+  </p>
+
+    <form class="d-flex" role="search" method="GET" action="{{ url_for('search_recipes_query') }}">
+        <input class="form-control me-2" name="querySearchTerm" type="search" placeholder="Search" aria-label="Search" required />
+            <button class="btn btn-outline-success" type="submit">
+                Search
+            </button>
+    </form>
+    {% endblock intro %}
+
+    
+
+  {% block main_section%} 
+  <section class="recipe-section container py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">All Recipes</h2>
+        <div class="recipes row">
+                {% if recipes %}
+                    {% for recipe in recipes %}
+                        {% set recipe_id = recipe[0] %}
+                        {% set recipe_name = recipe[1] %}
+                        {% set recipe_description = recipe[2] %}
+                        {% set recipe_image = recipe[3] %}
+                        {% include "./includes/recipe_cards_list.html" %}
+                    {% endfor %}
+                {% else %}
+                    <p>No recipes found matching your search.</p>
+                    
+                {% endif %}
+        </div>
+  </section>
+  {% endblock main_section %}

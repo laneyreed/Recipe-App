@@ -25,7 +25,18 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{url_for('home')}}">Home</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{url_for('get_recipe_categories')}}">Recipes</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Recipes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{url_for('all_recipes')}}">All Recipes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{url_for('get_recipe_categories')}}">Recipe Categories</a></li>
+                            <li><a class="dropdown-item" href="#">Popular Recipes</a></li>
+                            <li><a class="dropdown-item" href="#">New Recipes</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link">About Us</a>
                     </li>

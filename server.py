@@ -23,6 +23,22 @@ conn = odbc.connect(connection_string)
 def home():
     return render_template("index.html")
 
+@app.route("/all-recipes")
+def all_recipes():
+    local_cursor = conn.cursor()
+    try:
+        all_recipes_cursor = local_cursor.execute("SELECT recipe_id, recipe_name, recipe_description, recipe_image_url FROM recipes")
+        all_recipes_list = []
+        for row in all_recipes_cursor:
+            all_recipes_list.append(list(row))
+    finally:
+        local_cursor.close()
+
+    return render_template("all_recipes.html", recipes=all_recipes_list)
+
+
+
+
 @app.route("/recipes-categories")
 def get_recipe_categories():
     local_cursor = conn.cursor()

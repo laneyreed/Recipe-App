@@ -88,7 +88,8 @@ def get_recipe_details(recipe_id):
     local_cursor = conn.cursor()
     try:
 
-        # get recipe_id, recipe_name, recipe_description, prep_time, cook_time, author_name
+        # RECIPE INFO---------------------------------------------------------------------------------------------
+        # get recipe_info: recipe_id, recipe_name, recipe_description, prep_time, cook_time, author_name
         recipe_info = local_cursor.execute(
             """
             SELECT r.recipe_id, r.recipe_name, r.recipe_description, r.prep_time, r.cook_time, a.author_name
@@ -97,12 +98,29 @@ def get_recipe_details(recipe_id):
             WHERE r.recipe_id = ?;
             """, [recipe_id]
         )
-       
-       #make recipe_info into a list
-        recipe_info_list = list(recipe_info.fetchone())
-        #[recipe_id, recipe_name, recipe_description, prep_time, cook_time, author_name]
-        #print(recipe_info_list)
 
+        # make recipe_info into a list: [recipe_id, recipe_name, recipe_description, prep_time, cook_time, author_name]
+        recipe_info_list = list(recipe_info.fetchone())
+
+        # RECIPE INGREDIENTS---------------------------------------------------------------------------------------------
+        # get ingredients for the recipe
+        recipe_ingredients = local_cursor.execute(
+            """
+            SELECT ri.quantity, mu.measurement_unit_name, i.ingredient_name
+            FROM recipe_ingredient ri
+            JOIN measurement_units mu ON ri.measurement_unit_id = mu.measurement_unit_id
+            JOIN ingredients i ON ri.ingredient_id = i.ingredient_id
+            WHERE ri.recipe_id = ?;
+            """, [recipe_id]
+        )
+
+        # make recipe_ingredients into a list of lists
+        recipe_ingredients_list = []
+        for row in recipe_ingredients:
+            recipe_ingredients_list.append(list(row))
+        # print(recipe_ingredients_list)
+
+        # RECIPE INSTRUCTIONS---------------------------------------------------------------------------------------------
         # get instructions for the recipe
         recipe_instructions = local_cursor.execute(
             """
@@ -112,16 +130,17 @@ def get_recipe_details(recipe_id):
             ORDER BY step_number;
             """, [recipe_id]
         )
-    #make recipe_instructions into a list of lists
+
+        #make recipe_instructions into a list of lists
         recipe_instructions_list = []
         for row in recipe_instructions:
             recipe_instructions_list.append(list(row))
-        print(recipe_instructions_list)
+        # print(recipe_instructions_list)
 
     finally:
         local_cursor.close()
     # return render_template("recipe_detail.html", recipe=recipe_info_list, ingredients=recipe_ingredients)
-    return render_template("recipe_detail.html", recipe_info=recipe_info_list, instructions=recipe_instructions_list)
+    return render_template("recipe_detail.html", recipe_info=recipe_info_list, ingredients=recipe_ingredients_list, instructions=recipe_instructions_list)
 
 
 

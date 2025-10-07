@@ -196,6 +196,7 @@ ____________________________________
 -- updated the recipe_cards_list.html to use images from database
 -- updated the /recipes/type/<recipe_type> route
 -- updated the /recipes/<int:recipe_id> route to get instruction from database and simpler sql queries
-- update the recipe details html file
--------next add sql query to get the ingredients
+-- update the recipe details html file
+-- added sql query to get the ingredients
+-- changed the layout of the recipe ingredients and instructions cards to have independent heights
 -->

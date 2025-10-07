@@ -135,6 +135,7 @@ def get_recipe_details(recipe_id):
         local_cursor.close()
     return render_template("recipe_detail.html", recipe_info=recipe_info_list, ingredients=recipe_ingredients_list, instructions=recipe_instructions_list)
 
+
 @app.route("/query_search_results") # Example: http://localhost:5001/query_search_results?querySearchTerm=pasta
 def search_recipes_query():
     query_search_term = request.args.get('querySearchTerm', default='', type=str).strip()

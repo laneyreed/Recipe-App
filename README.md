@@ -1,15 +1,34 @@
-# Vegan Recipe Web Application
+# PlateShare - Vegan Recipe Web Application
 
-A Flask-based web application for browsing and viewing vegan recipes, featuring a clean interface and database-driven content management.
+A comprehensive Flask-based web application for browsing, searching, and viewing vegan recipes with a modern, responsive interface and robust database integration.
 
-## 🌱 About
+## 🌱 Project Overview
 
-This vegan recipe application provides users with a curated collection of plant-based recipes organized by categories. The app features a modern, responsive design with recipe categorization, detailed recipe views, and ingredient listings.
+PlateShare is a full-stack web application designed to showcase and organize a curated collection of vegan recipes. The application follows a traditional MVC architecture using Flask as the backend framework, with SQL Server providing data persistence and Bootstrap ensuring responsive frontend design.
+
+### 🎯 Core Functionality
+
+**Recipe Management**
+- Display recipes organized by categories (appetizers, breakfast, soups, salads, sides, entrees, desserts)
+- Detailed recipe views with ingredients, cooking instructions, prep/cook times
+- Featured recipes section for highlighting popular or seasonal content
+
+**User Experience**  
+- Responsive navigation with dropdown menu system
+- Recipe search functionality across the database
+- Clean, mobile-friendly interface using Bootstrap components
+- Modular CSS architecture for maintainable styling
+
+**Data Layer**
+- SQL Server database integration using pypyodbc
+- Structured data relationships for recipes, categories, ingredients, and instructions
+- Database connection management and query execution
 
 ## ✨ Features
 
 - **Recipe Categories**: Browse recipes by type (appetizers, breakfast, soups, salads, sides, entrees, desserts)
 - **Recipe Details**: View comprehensive recipe information including ingredients, preparation time, and cooking time
+- **Search Functionality**: Search for recipes by name or description
 - **Featured Recipes**: Highlighted recipes on the homepage for inspiration
 - **Responsive Design**: Mobile-friendly interface with Bootstrap styling
 - **Database Integration**: SQL Server database for reliable data storage and retrieval
@@ -46,7 +65,6 @@ The application uses a modern, clean design approach with:
 ## 🔮 Future Enhancements
 
 - [ ] User authentication and recipe submission
-- [ ] Recipe search functionality
 - [ ] User ratings and reviews
 - [ ] Nutritional information display
 - [ ] Recipe sharing capabilities
@@ -72,4 +90,6 @@ ____________________________________
 -- added Search functionality
 -- added search results html file
 -- changed recipe cards html file to be used for both search results and recipies by category
+-- added all recipes html file
+-- added drop down menu for recipes
 -->
